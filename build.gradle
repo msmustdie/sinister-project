@@ -1,7 +1,24 @@
 apply plugin: 'java'
+apply plugin: 'maven'
 
 repositories {
    jcenter()
+   maven {
+          url "http://192.168.1.245:8081/nexus/content/repositories/releases"
+    }
+}
+
+uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://192.168.1.245:8081/nexus/content/repositories/releases") {
+             authentication(userName: "jenkins", password: "ALCaAqSQd")
+}
+             pom.version = "10.0"
+             pom.artifactId = "sinister-project"
+             pom.groupId = "com"
+       }
+    }
 }
 
 dependencies {
